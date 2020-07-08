@@ -1,10 +1,10 @@
 public class main {
     public static void main(String[] args) {
 
-        int[] input = new int[]{10,13,12,14,15};
+        int[] input = new int[]{3,3,3,1,2,1,1,2,3,3,4};
 
-        LC975 lc = new LC975();
-        System.out.println(lc.oddEvenJumps(input));
+        LC904 lc = new LC904();
+        System.out.println(lc.totalFruit(input));
 
 
 
