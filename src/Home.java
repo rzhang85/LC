@@ -1,4 +1,4 @@
-public class main {
+public class Home {
     public static void main(String[] args) {
 
         int[] input = new int[]{-2, 0, 0, 2, 2};

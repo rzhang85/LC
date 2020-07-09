@@ -7,13 +7,13 @@ public class LC1029_Two_City_Scheduling {
     public int twoCitySchedCost(int[][] costs) {
         int sum = 0;
         // Assume everyone goes to A
-        for (int i = 0; i < costs.length; i++){
-            sum += costs[i][0];
+        for (int[] cost : costs) {
+            sum += cost[0];
         }
 
         List<Integer> costDiff_A = new ArrayList<>();
-        for (int i = 0; i < costs.length; i ++){
-            costDiff_A.add(costs[i][1] - costs[i][0]);
+        for (int[] cost : costs) {
+            costDiff_A.add(cost[1] - cost[0]);
         }
         Collections.sort(costDiff_A);
         for(int i = 0; i < costs.length/2; i ++){

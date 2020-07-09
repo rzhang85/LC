@@ -10,7 +10,7 @@ class TrieNode {
 
 class LC212 {
     char[][] _board = null;
-    ArrayList<String> _result = new ArrayList<String>();
+    ArrayList<String> _result = new ArrayList<>();
 
     public List<String> findWords(char[][] board, String[] words) {
 

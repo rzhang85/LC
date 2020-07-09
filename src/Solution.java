@@ -18,13 +18,12 @@ class Solution {
         for(String word : words){
             char[] w = word.toCharArray();
             Trie tmp = root;
-            for(int i = 0; i < w.length; i ++){
-                if(tmp.children.containsKey(w[i])){
-                    tmp = tmp.children.get(w[i]);
-                }
-                else{
+            for (char c : w) {
+                if (tmp.children.containsKey(c)) {
+                    tmp = tmp.children.get(c);
+                } else {
                     Trie newTrie = new Trie();
-                    tmp.children.put(w[i], newTrie);
+                    tmp.children.put(c, newTrie);
                     tmp = newTrie;
                 }
             }

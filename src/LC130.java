@@ -33,7 +33,7 @@ public class LC130 {
         else{
             flag[i][j] = 1;
 
-            boolean left = false, right = false, top = false, bottom = false;
+            boolean left, right, top, bottom;
 
 
             if(board[i-1] [j] == 'X' || flag[i-1] [j] == 1)
@@ -57,7 +57,7 @@ public class LC130 {
                 right = checkReigion(i, j+1);
 
             // flip if this node satisfied
-            if(top && right && top && bottom){
+            if(left && right && top && bottom){
                 board[i][j] = 'X';
             }
 
