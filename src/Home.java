@@ -3,10 +3,10 @@ public class Home {
 
         int[] input = new int[]{1,2,3};
 
-        LC78 lc = new LC78();
+        LC76 lc = new LC76();
 
 
-        System.out.println(3/2);
+        System.out.println(lc.minWindow("aa", "aa"));
 
 
 
