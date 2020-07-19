@@ -1,85 +1,75 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class LC210 {
-    static int WHITE = 1;
-    static int GRAY = 2;
-    static int BLACK = 3;
+public class LC210 {    static int WHITE = 0;
+    static int GRAY = 1;
+    static int BLACK = 2;
 
-    boolean isPossible;
-    Map<Integer, Integer> color;
-    Map<Integer, List<Integer>> adjList;
-    List<Integer> topologicalOrder;
+    Map<Integer, Integer> colors = new HashMap<>();
+    boolean cyclic = false;
+    Map<Integer, List<Integer>> adjList = new HashMap<>();
+    List<Integer> topologicalOrder = new LinkedList<>();
 
-    private void init(int numCourses) {
-        this.isPossible = true;
-        this.color = new HashMap<Integer, Integer>();
-        this.adjList = new HashMap<Integer, List<Integer>>();
-        this.topologicalOrder = new ArrayList<Integer>();
-
-        // By default all vertces are WHITE
-        for (int i = 0; i < numCourses; i++) {
-            this.color.put(i, WHITE);
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        // first set all color to white.
+        for(int i = 0; i < numCourses; i ++){
+            colors.put(i, WHITE);
         }
+
+        // create adjacency list
+        for (int[] prerequisite : prerequisites) {
+            int source = prerequisite[1];
+            int destination = prerequisite[0];
+            List<Integer> curList = adjList.get(source);
+            if (curList == null) {
+                curList = new ArrayList<>();
+            }
+            curList.add(destination);
+            adjList.put(source, curList);
+        }
+
+        // perform dfs on each node
+        for(int i  = 0; i < numCourses; i ++){
+            if(colors.get(i) == WHITE){
+                DFS(i);
+            }
+        }
+
+
+        int [] result;
+        if(cyclic){
+            result = new int[0];
+        }
+        else{
+            result = new int[numCourses];
+            for(int i = 0 ; i < numCourses; i ++){
+                result[i] = topologicalOrder.get(numCourses - i - 1);
+            }
+        }
+
+        return result;
     }
 
-    private void dfs(int node) {
-
-        // Don't recurse further if we found a cycle already
-        if (!this.isPossible) {
+    public void DFS(int node){
+        if(cyclic){
             return;
         }
 
-        // Start the recursion
-        this.color.put(node, GRAY);
+        colors.put(node, GRAY);
 
-        // Traverse on neighboring vertices
-        for (Integer neighbor : this.adjList.getOrDefault(node, new ArrayList<Integer>())) {
-            if (this.color.get(neighbor) == WHITE) {
-                this.dfs(neighbor);
-            } else if (this.color.get(neighbor) == GRAY) {
-                // An edge to a GRAY vertex represents a cycle
-                this.isPossible = false;
+        List<Integer> neighbours = adjList.get(node);
+        if(neighbours != null){
+            for (int neighbour: neighbours){
+                if(colors.get(neighbour) == GRAY){
+                    cyclic = true;
+                }
+                else if(colors.get(neighbour) == WHITE){
+                    DFS(neighbour);
+                }
             }
         }
 
-        // Recursion ends. We mark it as black
-        this.color.put(node, BLACK);
+        colors.put(node, BLACK);
         this.topologicalOrder.add(node);
-    }
 
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-
-        this.init(numCourses);
-
-        // Create the adjacency list representation of the graph
-        for (int i = 0; i < prerequisites.length; i++) {
-            int dest = prerequisites[i][0];
-            int src = prerequisites[i][1];
-            List<Integer> lst = adjList.getOrDefault(src, new ArrayList<Integer>());
-            lst.add(dest);
-            adjList.put(src, lst);
-        }
-
-        // If the node is unprocessed, then call dfs on it.
-        for (int i = 0; i < numCourses; i++) {
-            if (this.color.get(i) == WHITE) {
-                this.dfs(i);
-            }
-        }
-
-        int[] order;
-        if (this.isPossible) {
-            order = new int[numCourses];
-            for (int i = 0; i < numCourses; i++) {
-                order[i] = this.topologicalOrder.get(numCourses - i - 1);
-            }
-        } else {
-            order = new int[0];
-        }
-
-        return order;
     }
 }
