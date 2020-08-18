@@ -2,10 +2,11 @@ public class Home {
     public static void main(String[] args) {
 
 
-        LC1286 lc = new LC1286("abcd", 2);
-
-
-
+        LC967 lc = new LC967();
+        int[] result = lc.numsSameConsecDiff(2, 1);
+        for(int i: result){
+            System.out.println(i);
+        }
 
     }
 }
