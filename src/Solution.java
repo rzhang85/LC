@@ -2,11 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Trie{
-    HashMap<Character, Trie> children = new HashMap<>();
-    String word = null;
-    public Trie(){}
-}
+
 
 class Solution {
     List<String> result = new ArrayList<>();

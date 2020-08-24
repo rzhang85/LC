@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class LC211 {
 
     /**
@@ -56,4 +58,10 @@ public class LC211 {
     }
 
 
+}
+
+class Trie{
+    HashMap<Character, Trie> children = new HashMap<>();
+    String word = null;
+    public Trie(){}
 }

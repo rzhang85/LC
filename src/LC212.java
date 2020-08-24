@@ -2,11 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class TrieNode {
-    HashMap<Character, TrieNode> children = new HashMap<>();
-    String word = null;
-    public TrieNode() {}
-}
 
 class LC212 {
     char[][] _board = null;
@@ -15,15 +10,15 @@ class LC212 {
     public List<String> findWords(char[][] board, String[] words) {
 
         // Step 1). Construct the Trie
-        TrieNode root = new TrieNode();
+        Trie root = new Trie();
         for (String word : words) {
-            TrieNode node = root;
+            Trie node = root;
 
             for (Character letter : word.toCharArray()) {
                 if (node.children.containsKey(letter)) {
                     node = node.children.get(letter);
                 } else {
-                    TrieNode newNode = new TrieNode();
+                    Trie newNode = new Trie();
                     node.children.put(letter, newNode);
                     node = newNode;
                 }
@@ -44,9 +39,9 @@ class LC212 {
         return this._result;
     }
 
-    private void backtracking(int row, int col, TrieNode parent) {
+    private void backtracking(int row, int col, Trie parent) {
         Character letter = this._board[row][col];
-        TrieNode currNode = parent.children.get(letter);
+        Trie currNode = parent.children.get(letter);
 
         // check if there is any match
         if (currNode.word != null) {
