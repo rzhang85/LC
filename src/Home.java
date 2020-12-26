@@ -5,10 +5,9 @@ public class Home {
     public static int target = 2;
     static HashSet<Integer> set = new HashSet<>();
     public static void main(String[] args) {
-        String str = "520";
 
-        permutation(str, "");
-        System.out.println(set.size());
+        System.out.println(6/2);
+
     }
 
     public static void permutation(String str, String ans){
@@ -26,5 +25,6 @@ public class Home {
         }
 
     }
+
 
 }
