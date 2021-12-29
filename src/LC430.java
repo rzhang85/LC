@@ -1,17 +1,17 @@
 import java.util.Stack;
 
 public class LC430 {
-    public Node flatten(Node head) {
+    public Node430 flatten(Node430 head) {
         if(head == null){
             return head;
         }
 
-        Stack<Node> stack = new Stack<>();
+        Stack<Node430> stack = new Stack<>();
         stack.push(head);
-        Node virtualHead = new Node(0, null, head, null);   // keep track or head position
-        Node prevNode = virtualHead;
+        Node430 virtualHead = new Node430(0, null, head, null);   // keep track or head position
+        Node430 prevNode = virtualHead;
         while(!stack.empty()){
-            Node current = stack.pop();
+            Node430 current = stack.pop();
             prevNode.next = current;
             current.prev = prevNode;
 
@@ -33,12 +33,12 @@ public class LC430 {
     }
 }
 
-class Node {
+class Node430 {
     public int val;
-    public Node prev;
-    public Node next;
-    public Node child;
-    public Node(int val, Node prev, Node next, Node child){
+    public Node430 prev;
+    public Node430 next;
+    public Node430 child;
+    public Node430(int val, Node430 prev, Node430 next, Node430 child){
         this.val = val;
         this.prev = prev;
         this.next = next;
